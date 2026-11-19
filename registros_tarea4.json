@@ -1,416 +1,144 @@
 [
 {
-  "model": "auth.permission",
+  "model": "gestion.categoria",
   "pk": 1,
   "fields": {
-    "name": "Can add log entry",
-    "content_type": 1,
-    "codename": "add_logentry"
+    "nombre": "terror",
+    "descripcion": ""
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.categoria",
   "pk": 2,
   "fields": {
-    "name": "Can change log entry",
-    "content_type": 1,
-    "codename": "change_logentry"
+    "nombre": "romance",
+    "descripcion": ""
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.categoria",
   "pk": 3,
   "fields": {
-    "name": "Can delete log entry",
-    "content_type": 1,
-    "codename": "delete_logentry"
+    "nombre": "comedia",
+    "descripcion": ""
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.categoria",
   "pk": 4,
   "fields": {
-    "name": "Can view log entry",
-    "content_type": 1,
-    "codename": "view_logentry"
+    "nombre": "accion",
+    "descripcion": ""
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.pelicula",
+  "pk": 1,
+  "fields": {
+    "titulo": "spider",
+    "director": "Sam Raimi",
+    "anio": 2002,
+    "sinopsis": "Spider-Man (2002), dirigida por Sam Raimi y protagonizada por Tobey Maguire, cuenta cómo el tímido estudiante Peter Parker obtiene poderes arácnidos tras ser mordido por una araña modificada genéticamente y asume el deber de proteger Nueva York como el Hombre Araña.",
+    "categoria": 4
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 2,
+  "fields": {
+    "titulo": "Rapido y Furiosos",
+    "director": "Rob cohen",
+    "anio": 2001,
+    "sinopsis": "Rápido y furioso (2001) sigue a Brian O'Conner, un policía encubierto de Los Ángeles que se infiltra en el mundo de las carreras callejeras ilegales para investigar una serie de robos de camiones en marcha",
+    "categoria": 4
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 3,
+  "fields": {
+    "titulo": "Avengers: Endgame",
+    "director": "Anthony y Joe Russo",
+    "anio": 2019,
+    "sinopsis": "Avengers: Endgame , concluye la Saga del Infinito del Universo Cinematográfico de Marvel (UCM) mientras los Vengadores supervivientes viajan en el tiempo para revertir el chasquido de Thanos",
+    "categoria": 4
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 4,
+  "fields": {
+    "titulo": "Son como niños",
+    "director": "Dennis Dugan",
+    "anio": 2010,
+    "sinopsis": "es una comedia protagonizada por Adam Sandler, Kevin James, Chris Rock, David Spade y Rob Schneider\r\n• El reencuentro: En 1978, cinco amigos de la infancia ganan un campeonato de baloncesto juvenil y celebran en una casa junto a un lago junto a su entrenador. Treinta años después, tras haber perdido el contacto y convertido en adultos con diversos problemas, se vuelven a reunir con sus familias en Nueva Inglaterra para asistir al funeral de su querido entrenado",
+    "categoria": 3
+  }
+},
+{
+  "model": "gestion.pelicula",
   "pk": 5,
   "fields": {
-    "name": "Can add permission",
-    "content_type": 3,
-    "codename": "add_permission"
+    "titulo": "¿Y dónde están las rubias?",
+    "director": "Keenen Ivory Wayans",
+    "anio": 2004,
+    "sinopsis": "• El error en el FBI: Kevin y Marcus Copeland son dos agentes del FBI torpes que cometen un gran error en un operativo antidrogas.\r\n• La misión: Para no ser despedidos, aceptan la humillante y sencilla tarea de escoltar a las hermanas Brittany y Tiffany Wilson —unas millonarias herederas de un famoso hotel— desde el aeropuerto hasta un evento en los Hamptons, ya que existe una amenaza de secuestro",
+    "categoria": 3
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.pelicula",
   "pk": 6,
   "fields": {
-    "name": "Can change permission",
-    "content_type": 3,
-    "codename": "change_permission"
+    "titulo": "La la land",
+    "director": "Damien Chazelle.",
+    "anio": 2016,
+    "sinopsis": "La historia sigue a dos jóvenes artistas que luchan por abrirse camino en Los Ángeles, California:\r\n• Mia (Emma Stone) es una joven camarera y aspirante a actriz que asiste constantemente a audiciones sin éxito.\r\n• Sebastian (Ryan Gosling) es un pianista de jazz apasionado y purista que sueña con abrir su propio club para mantener vivo este género musical, pero que sobrevive tocando en bares poco reconocidos.\r\nTras coincidir en varias ocasiones, ambos se conocen, se enamoran y se convierten en el mayor apoyo mutuo para alcanzar sus metas",
+    "categoria": 2
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.pelicula",
   "pk": 7,
   "fields": {
-    "name": "Can delete permission",
-    "content_type": 3,
-    "codename": "delete_permission"
+    "titulo": "Chucky: El muñeco diabólico",
+    "director": "Tom holland",
+    "anio": 1988,
+    "sinopsis": "sigue al asesino en serie Charles Lee Ray, quien transfiere su alma mediante un ritual vudú a un muñeco \"Good Guys\" justo antes de morir a manos de la policía, para luego intentar poseer al niño Andy Barclay.",
+    "categoria": 1
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.pelicula",
   "pk": 8,
   "fields": {
-    "name": "Can view permission",
-    "content_type": 3,
-    "codename": "view_permission"
+    "titulo": "Diario de una pasion",
+    "director": "Nick Cassavetes",
+    "anio": 2004,
+    "sinopsis": "El romance de verano (1940): Allie Hamilton (Rachel McAdams), una joven de la alta sociedad, y Noah Calhoun (Ryan Gosling), un joven obrero de clase trabajadora, se conocen en un carnaval y viven un amor de verano intenso. Los padres de Allie desaprueban la relación por la diferencia de recursos económicos y obligan a separarlos.",
+    "categoria": 2
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.pelicula",
   "pk": 9,
   "fields": {
-    "name": "Can add group",
-    "content_type": 2,
-    "codename": "add_group"
+    "titulo": "norbit",
+    "director": "Brian Robbins",
+    "anio": 2007,
+    "sinopsis": "Norbit es un hombre amable y tímido que fue abandonado de bebé en un orfanato y restaurante chino dirigido por el Sr. Wong. Con el tiempo, queda atrapado en un matrimonio abusivo con la dominante y agresiva Rasputia.\r\nSu vida cambia cuando Kate, su gran amor de la infancia, regresa al pueblo. A partir de ese reencuentro, Norbit intenta escapar de su matrimonio y recuperar su vida, mientras enfrenta los planes de la familia de Rasputia sobre el orfanato y el negocio local.",
+    "categoria": 3
   }
 },
 {
-  "model": "auth.permission",
+  "model": "gestion.pelicula",
   "pk": 10,
   "fields": {
-    "name": "Can change group",
-    "content_type": 2,
-    "codename": "change_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 11,
-  "fields": {
-    "name": "Can delete group",
-    "content_type": 2,
-    "codename": "delete_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 12,
-  "fields": {
-    "name": "Can view group",
-    "content_type": 2,
-    "codename": "view_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 13,
-  "fields": {
-    "name": "Can add user",
-    "content_type": 4,
-    "codename": "add_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 14,
-  "fields": {
-    "name": "Can change user",
-    "content_type": 4,
-    "codename": "change_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 15,
-  "fields": {
-    "name": "Can delete user",
-    "content_type": 4,
-    "codename": "delete_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 16,
-  "fields": {
-    "name": "Can view user",
-    "content_type": 4,
-    "codename": "view_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 17,
-  "fields": {
-    "name": "Can add content type",
-    "content_type": 5,
-    "codename": "add_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 18,
-  "fields": {
-    "name": "Can change content type",
-    "content_type": 5,
-    "codename": "change_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 19,
-  "fields": {
-    "name": "Can delete content type",
-    "content_type": 5,
-    "codename": "delete_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 20,
-  "fields": {
-    "name": "Can view content type",
-    "content_type": 5,
-    "codename": "view_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 21,
-  "fields": {
-    "name": "Can add session",
-    "content_type": 6,
-    "codename": "add_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 22,
-  "fields": {
-    "name": "Can change session",
-    "content_type": 6,
-    "codename": "change_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 23,
-  "fields": {
-    "name": "Can delete session",
-    "content_type": 6,
-    "codename": "delete_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 24,
-  "fields": {
-    "name": "Can view session",
-    "content_type": 6,
-    "codename": "view_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 25,
-  "fields": {
-    "name": "Can add integrante",
-    "content_type": 8,
-    "codename": "add_integrante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 26,
-  "fields": {
-    "name": "Can change integrante",
-    "content_type": 8,
-    "codename": "change_integrante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 27,
-  "fields": {
-    "name": "Can delete integrante",
-    "content_type": 8,
-    "codename": "delete_integrante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 28,
-  "fields": {
-    "name": "Can view integrante",
-    "content_type": 8,
-    "codename": "view_integrante"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 29,
-  "fields": {
-    "name": "Can add proyecto",
-    "content_type": 9,
-    "codename": "add_proyecto"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 30,
-  "fields": {
-    "name": "Can change proyecto",
-    "content_type": 9,
-    "codename": "change_proyecto"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 31,
-  "fields": {
-    "name": "Can delete proyecto",
-    "content_type": 9,
-    "codename": "delete_proyecto"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 32,
-  "fields": {
-    "name": "Can view proyecto",
-    "content_type": 9,
-    "codename": "view_proyecto"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 33,
-  "fields": {
-    "name": "Can add actividad",
-    "content_type": 7,
-    "codename": "add_actividad"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 34,
-  "fields": {
-    "name": "Can change actividad",
-    "content_type": 7,
-    "codename": "change_actividad"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 35,
-  "fields": {
-    "name": "Can delete actividad",
-    "content_type": 7,
-    "codename": "delete_actividad"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 36,
-  "fields": {
-    "name": "Can view actividad",
-    "content_type": 7,
-    "codename": "view_actividad"
-  }
-},
-{
-  "model": "auth.user",
-  "pk": 1,
-  "fields": {
-    "password": "pbkdf2_sha256$1500000$uT4aEuhYD2XjDJnpGBIkrQ$p04o/+IJGz/Lwgsp/GQ8B8vuiCRndjB79Lkw6TbKEtY=",
-    "last_login": null,
-    "is_superuser": true,
-    "username": "cano",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": true,
-    "is_active": true,
-    "date_joined": "2026-11-19T16:26:33.272Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 1,
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 2,
-  "fields": {
-    "app_label": "auth",
-    "model": "group"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 4,
-  "fields": {
-    "app_label": "auth",
-    "model": "user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 5,
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 7,
-  "fields": {
-    "app_label": "gestion",
-    "model": "actividad"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 8,
-  "fields": {
-    "app_label": "gestion",
-    "model": "integrante"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 9,
-  "fields": {
-    "app_label": "gestion",
-    "model": "proyecto"
+    "titulo": "scream 1",
+    "director": "Wes Craven",
+    "anio": 1996,
+    "sinopsis": "un asesino enmascarado conocido como Ghostface aterroriza al pueblo de Woodsboro un año después de la muerte de la madre de la adolescente Sidney Prescott, utilizando las reglas de las películas de terror en un juego mortal",
+    "categoria": 1
   }
 }
 ]
