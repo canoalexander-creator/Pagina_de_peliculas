@@ -5,18 +5,73 @@
     <title>Catálogo de Películas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-<nav class="navbar navbar-dark bg-dark px-4">
+<body class="bg-light">
+
+
+<nav class="navbar navbar-dark bg-dark px-4 mb-4">
     <span class="navbar-brand">🎬 Catálogo de Películas</span>
     <div class="d-flex align-items-center text-white">
         <span class="me-3">Bienvenido, <strong>{{ user.username }}</strong></span>
         <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Cerrar Sesión</a>
     </div>
 </nav>
-<div class="container mt-4">
-    <div class="alert alert-success">
-        Has iniciado sesión correctamente. Aquí se mostrará el catálogo completo en la Tarea 2.
+
+
+<div class="container">
+    <!-- Sección de Categorías -->
+    <h4 class="mb-3">Categorías Disponibles ({{ categorias.count }})</h4>
+    <div class="row mb-4">
+        {% for cat in categorias %}
+        <div class="col-md-4 mb-2">
+            <div class="card border-primary h-100">
+                <div class="card-body py-2">
+                    <h6 class="card-title text-primary mb-1">{{ cat.nombre }}</h6>
+                    <p class="card-text small text-muted mb-0">{{ cat.descripcion }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-muted">No hay categorías registradas.</p>
+        {% endfor %}
+    </div>
+
+
+    <!-- Sección de Películas -->
+    <h4 class="mb-3">Listado de Películas ({{ peliculas.count }})</h4>
+    <div class="card shadow-sm mb-5">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Título</th>
+                        <th>Categoría</th>
+                        <th>Director</th>
+                        <th>Año</th>
+                        <th>Sinopsis</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for peli in peliculas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td><strong>{{ peli.titulo }}</strong></td>
+                        <td><span class="badge bg-secondary">{{ peli.categoria.nombre }}</span></td>
+                        <td>{{ peli.director }}</td>
+                        <td>{{ peli.anio }}</td>
+                        <td>{{ peli.sinopsis }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No hay películas registradas.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>
