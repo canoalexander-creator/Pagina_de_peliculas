@@ -32,13 +32,21 @@
   }
 },
 {
+  "model": "gestion.categoria",
+  "pk": 5,
+  "fields": {
+    "nombre": "Suspenso",
+    "descripcion": "Peliculas de intriga y tension."
+  }
+},
+{
   "model": "gestion.pelicula",
   "pk": 1,
   "fields": {
     "titulo": "spider",
     "director": "Sam Raimi",
     "anio": 2002,
-    "sinopsis": "Spider-Man (2002), dirigida por Sam Raimi y protagonizada por Tobey Maguire, cuenta c√≥mo el t√≠mido estudiante Peter Parker obtiene poderes ar√°cnidos tras ser mordido por una ara√±a modificada gen√©ticamente y asume el deber de proteger Nueva York como el Hombre Ara√±a.",
+    "sinopsis": "Spider-Man (2002), dirigida por Sam Raimi y protagonizada por Tobey Maguire, cuenta cÛmo el tÌmido estudiante Peter Parker obtiene poderes ar·cnidos tras ser mordido por una araÒa modificada genÈticamente y asume el deber de proteger Nueva York como el Hombre AraÒa.",
     "categoria": 4
   }
 },
@@ -49,7 +57,7 @@
     "titulo": "Rapido y Furiosos",
     "director": "Rob cohen",
     "anio": 2001,
-    "sinopsis": "R√°pido y furioso (2001) sigue a Brian O'Conner, un polic√≠a encubierto de Los √Ångeles que se infiltra en el mundo de las carreras callejeras ilegales para investigar una serie de robos de camiones en marcha",
+    "sinopsis": "R·pido y furioso (2001) sigue a Brian O'Conner, un policÌa encubierto de Los ¡ngeles que se infiltra en el mundo de las carreras callejeras ilegales para investigar una serie de robos de camiones en marcha",
     "categoria": 4
   }
 },
@@ -60,7 +68,7 @@
     "titulo": "Avengers: Endgame",
     "director": "Anthony y Joe Russo",
     "anio": 2019,
-    "sinopsis": "Avengers: Endgame , concluye la Saga del Infinito del Universo Cinematogr√°fico de Marvel (UCM) mientras los Vengadores supervivientes viajan en el tiempo para revertir el chasquido de Thanos",
+    "sinopsis": "Avengers: Endgame , concluye la Saga del Infinito del Universo Cinematogr·fico de Marvel (UCM) mientras los Vengadores supervivientes viajan en el tiempo para revertir el chasquido de Thanos",
     "categoria": 4
   }
 },
@@ -68,10 +76,10 @@
   "model": "gestion.pelicula",
   "pk": 4,
   "fields": {
-    "titulo": "Son como ni√±os",
+    "titulo": "Son como niÒos",
     "director": "Dennis Dugan",
     "anio": 2010,
-    "sinopsis": "es una comedia protagonizada por Adam Sandler, Kevin James, Chris Rock, David Spade y Rob Schneider\r\n‚Ä¢ El reencuentro: En 1978, cinco amigos de la infancia ganan un campeonato de baloncesto juvenil y celebran en una casa junto a un lago junto a su entrenador. Treinta a√±os despu√©s, tras haber perdido el contacto y convertido en adultos con diversos problemas, se vuelven a reunir con sus familias en Nueva Inglaterra para asistir al funeral de su querido entrenado",
+    "sinopsis": "es una comedia protagonizada por Adam Sandler, Kevin James, Chris Rock, David Spade y Rob Schneider\r\nï El reencuentro: En 1978, cinco amigos de la infancia ganan un campeonato de baloncesto juvenil y celebran en una casa junto a un lago junto a su entrenador. Treinta aÒos despuÈs, tras haber perdido el contacto y convertido en adultos con diversos problemas, se vuelven a reunir con sus familias en Nueva Inglaterra para asistir al funeral de su querido entrenado",
     "categoria": 3
   }
 },
@@ -79,10 +87,10 @@
   "model": "gestion.pelicula",
   "pk": 5,
   "fields": {
-    "titulo": "¬øY d√≥nde est√°n las rubias?",
+    "titulo": "øY dÛnde est·n las rubias?",
     "director": "Keenen Ivory Wayans",
     "anio": 2004,
-    "sinopsis": "‚Ä¢ El error en el FBI: Kevin y Marcus Copeland son dos agentes del FBI torpes que cometen un gran error en un operativo antidrogas.\r\n‚Ä¢ La misi√≥n: Para no ser despedidos, aceptan la humillante y sencilla tarea de escoltar a las hermanas Brittany y Tiffany Wilson ‚Äîunas millonarias herederas de un famoso hotel‚Äî desde el aeropuerto hasta un evento en los Hamptons, ya que existe una amenaza de secuestro",
+    "sinopsis": "ï El error en el FBI: Kevin y Marcus Copeland son dos agentes del FBI torpes que cometen un gran error en un operativo antidrogas.\r\nï La misiÛn: Para no ser despedidos, aceptan la humillante y sencilla tarea de escoltar a las hermanas Brittany y Tiffany Wilson óunas millonarias herederas de un famoso hoteló desde el aeropuerto hasta un evento en los Hamptons, ya que existe una amenaza de secuestro",
     "categoria": 3
   }
 },
@@ -93,7 +101,7 @@
     "titulo": "La la land",
     "director": "Damien Chazelle.",
     "anio": 2016,
-    "sinopsis": "La historia sigue a dos j√≥venes artistas que luchan por abrirse camino en Los √Ångeles, California:\r\n‚Ä¢ Mia (Emma Stone) es una joven camarera y aspirante a actriz que asiste constantemente a audiciones sin √©xito.\r\n‚Ä¢ Sebastian (Ryan Gosling) es un pianista de jazz apasionado y purista que sue√±a con abrir su propio club para mantener vivo este g√©nero musical, pero que sobrevive tocando en bares poco reconocidos.\r\nTras coincidir en varias ocasiones, ambos se conocen, se enamoran y se convierten en el mayor apoyo mutuo para alcanzar sus metas",
+    "sinopsis": "La historia sigue a dos jÛvenes artistas que luchan por abrirse camino en Los ¡ngeles, California:\r\nï Mia (Emma Stone) es una joven camarera y aspirante a actriz que asiste constantemente a audiciones sin Èxito.\r\nï Sebastian (Ryan Gosling) es un pianista de jazz apasionado y purista que sueÒa con abrir su propio club para mantener vivo este gÈnero musical, pero que sobrevive tocando en bares poco reconocidos.\r\nTras coincidir en varias ocasiones, ambos se conocen, se enamoran y se convierten en el mayor apoyo mutuo para alcanzar sus metas",
     "categoria": 2
   }
 },
@@ -101,10 +109,10 @@
   "model": "gestion.pelicula",
   "pk": 7,
   "fields": {
-    "titulo": "Chucky: El mu√±eco diab√≥lico",
+    "titulo": "Chucky: El muÒeco diabÛlico",
     "director": "Tom holland",
     "anio": 1988,
-    "sinopsis": "sigue al asesino en serie Charles Lee Ray, quien transfiere su alma mediante un ritual vud√∫ a un mu√±eco \"Good Guys\" justo antes de morir a manos de la polic√≠a, para luego intentar poseer al ni√±o Andy Barclay.",
+    "sinopsis": "sigue al asesino en serie Charles Lee Ray, quien transfiere su alma mediante un ritual vud˙ a un muÒeco \"Good Guys\" justo antes de morir a manos de la policÌa, para luego intentar poseer al niÒo Andy Barclay.",
     "categoria": 1
   }
 },
@@ -115,7 +123,7 @@
     "titulo": "Diario de una pasion",
     "director": "Nick Cassavetes",
     "anio": 2004,
-    "sinopsis": "El romance de verano (1940): Allie Hamilton (Rachel McAdams), una joven de la alta sociedad, y Noah Calhoun (Ryan Gosling), un joven obrero de clase trabajadora, se conocen en un carnaval y viven un amor de verano intenso. Los padres de Allie desaprueban la relaci√≥n por la diferencia de recursos econ√≥micos y obligan a separarlos.",
+    "sinopsis": "El romance de verano (1940): Allie Hamilton (Rachel McAdams), una joven de la alta sociedad, y Noah Calhoun (Ryan Gosling), un joven obrero de clase trabajadora, se conocen en un carnaval y viven un amor de verano intenso. Los padres de Allie desaprueban la relaciÛn por la diferencia de recursos econÛmicos y obligan a separarlos.",
     "categoria": 2
   }
 },
@@ -126,7 +134,7 @@
     "titulo": "norbit",
     "director": "Brian Robbins",
     "anio": 2007,
-    "sinopsis": "Norbit es un hombre amable y t√≠mido que fue abandonado de beb√© en un orfanato y restaurante chino dirigido por el Sr. Wong. Con el tiempo, queda atrapado en un matrimonio abusivo con la dominante y agresiva Rasputia.\r\nSu vida cambia cuando Kate, su gran amor de la infancia, regresa al pueblo. A partir de ese reencuentro, Norbit intenta escapar de su matrimonio y recuperar su vida, mientras enfrenta los planes de la familia de Rasputia sobre el orfanato y el negocio local.",
+    "sinopsis": "Norbit es un hombre amable y tÌmido que fue abandonado de bebÈ en un orfanato y restaurante chino dirigido por el Sr. Wong. Con el tiempo, queda atrapado en un matrimonio abusivo con la dominante y agresiva Rasputia.\r\nSu vida cambia cuando Kate, su gran amor de la infancia, regresa al pueblo. A partir de ese reencuentro, Norbit intenta escapar de su matrimonio y recuperar su vida, mientras enfrenta los planes de la familia de Rasputia sobre el orfanato y el negocio local.",
     "categoria": 3
   }
 },
@@ -137,7 +145,7 @@
     "titulo": "scream 1",
     "director": "Wes Craven",
     "anio": 1996,
-    "sinopsis": "un asesino enmascarado conocido como Ghostface aterroriza al pueblo de Woodsboro un a√±o despu√©s de la muerte de la madre de la adolescente Sidney Prescott, utilizando las reglas de las pel√≠culas de terror en un juego mortal",
+    "sinopsis": "un asesino enmascarado conocido como Ghostface aterroriza al pueblo de Woodsboro un aÒo despuÈs de la muerte de la madre de la adolescente Sidney Prescott, utilizando las reglas de las pelÌculas de terror en un juego mortal",
     "categoria": 1
   }
 }
