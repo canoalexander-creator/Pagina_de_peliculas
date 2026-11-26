@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Géneros y Categorías{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold mb-0">🎭 Géneros y Categorías</h2>
+        <p class="text-secondary mb-0">Clasificación del catálogo de películas</p>
+    </div>
+    {% if user.is_staff or user.is_superuser %}
+        <a href="{% url 'crear_categoria' %}" class="btn btn-cine">+ Nueva Categoría</a>
+    {% endif %}
+</div>
+
+<div class="card card-cine shadow">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0 align-middle">
+            <thead>
+                <tr>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Películas asociadas</th>
+                    {% if user.is_staff or user.is_superuser %}
+                        <th class="text-end">Acciones</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in categorias %}
+                <tr>
+                    <td class="fw-bold text-white">{{ categoria.nombre }}</td>
+                    <td class="text-light opacity-75">{{ categoria.descripcion|default:"Sin descripción" }}</td>
+                    <td><span class="badge bg-secondary">{{ categoria.peliculas.count }} películas</span></td>
+                    {% if user.is_staff or user.is_superuser %}
+                    <td class="text-end">
+                        <a href="{% url 'editar_categoria' categoria.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{% url 'eliminar_categoria' categoria.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center py-4 text-secondary">No hay categorías registradas todavía.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
