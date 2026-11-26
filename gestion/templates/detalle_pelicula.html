@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}{{ pelicula.titulo }} | Reseñas{% endblock %}
+
+
+{% block content %}
+<div class="mb-3">
+    <a href="{% url 'lista_peliculas' %}" class="btn btn-outline-light btn-sm">← Volver a Cartelera</a>
+</div>
+
+
+<div class="card card-cine p-4 mb-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
+        <div>
+            <span class="badge badge-categoria mb-2">{{ pelicula.categoria.nombre|default:"Sin categoría" }}</span>
+            <h2 class="fw-bold text-white mb-1">{{ pelicula.titulo }}</h2>
+            <p class="text-secondary mb-3">
+                <strong>Director:</strong> {{ pelicula.director|default:"—" }}  | 
+                <strong>Año:</strong> {{ pelicula.anio|default:"—" }}
+            </p>
+            <p class="text-light opacity-75 mb-0">{{ pelicula.sinopsis|default:"Sin sinopsis disponible." }}</p>
+        </div>
+        <div class="text-center p-3 rounded bg-dark border border-secondary">
+            <div class="text-secondary small">Calificación Promedio</div>
+            <div class="display-6 fw-bold text-warning">★ {{ pelicula.promedio_calificacion }}</div>
+            <div class="text-secondary small">{{ resenas.count }} reseña{{ resenas.count|pluralize }}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card card-cine p-4">
+            <h5 class="fw-bold text-white mb-3">✍️ Dejar una Reseña</h5>
+            {% if not user.is_authenticated %}
+                <p class="text-secondary">Debes <a href="{% url 'login' %}" class="text-danger">iniciar sesión</a> para calificar esta película.</p>
+            {% elif ya_reseno %}
+                <div class="alert alert-info py-2 small mb-0">
+                    Ya publicaste tu reseña en esta película. Puedes editarla o eliminarla en la lista.
+                </div>
+            {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label text-light">{{ form.calificacion.label }}</label>
+                        {{ form.calificacion }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-light">{{ form.comentario.label }}</label>
+                        {{ form.comentario }}
+                    </div>
+                    <button type="submit" class="btn btn-cine w-100">Publicar Reseña</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="col-lg-7">
+        <h5 class="fw-bold text-white mb-3">💬 Reseñas de Usuarios ({{ resenas.count }})</h5>
+        {% for resena in resenas %}
+        <div class="card card-cine p-3 mb-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                    <strong class="text-white">{{ resena.usuario.username }}</strong>
+                    <span class="badge bg-warning text-dark ms-2">★ {{ resena.calificacion }}/5</span>
+                </div>
+                <small class="text-secondary">{{ resena.fecha_creacion|date:"d M Y H:i" }}</small>
+            </div>
+            <p class="text-light opacity-75 mb-2">{{ resena.comentario }}</p>
+
+
+            {% if user == resena.usuario or user.is_staff or user.is_superuser %}
+            <div class="d-flex gap-2 justify-content-end">
+                <a href="{% url 'editar_resena' resena.pk %}" class="btn btn-outline-warning btn-sm">Editar</a>
+                <a href="{% url 'eliminar_resena' resena.pk %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
+            </div>
+            {% endif %}
+        </div>
+        {% empty %}
+        <div class="card card-cine p-4 text-center text-secondary">
+            Aún no hay reseñas para esta película. ¡Sé el primero en opinar!
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

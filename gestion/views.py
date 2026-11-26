@@ -1,39 +1,51 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
-from .models import Pelicula, Categoria
+from .models import Pelicula, Categoria, Resena
+from .forms import PeliculaForm, CategoriaForm, ResenaForm
 
-# Vista protegida: solo usuarios autenticados pueden entrar
-@login_required(login_url='login')
-def inicio(request):
-    peliculas = Pelicula.objects.select_related('categoria').all()
-    categorias = Categoria.objects.all()
-    return render(request, 'inicio.html', {
-        'peliculas': peliculas,
-        'categorias': categorias
-    })
 
-# 1. Registro de nuevos usuarios
+
+
+def es_admin(user):
+    return user.is_authenticated and (user.is_staff or user.is_superuser)
+
+
+
+
+# ==========================================
+# AUTENTICACIÓN Y REGISTRO
+# ==========================================
+
+
 def registro_usuario(request):
+    if request.user.is_authenticated:
+        return redirect('inicio')
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            usuario = form.save()
-            messages.success(request, f'¡Cuenta creada con éxito para {usuario.username}! Ahora inicia sesión.')
-            return redirect('login')
+            user = form.save()
+            login(request, user)
+            messages.success(request, f'¡Bienvenido, {user.username}! Tu cuenta fue creada.')
+            return redirect('inicio')
     else:
         form = UserCreationForm()
     return render(request, 'registro.html', {'form': form})
 
-# 2. Inicio de sesión
-def login_usuario(request):
+
+
+
+def iniciar_sesion(request):
+    if request.user.is_authenticated:
+        return redirect('inicio')
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            usuario = form.get_user()
-            login(request, usuario)
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f'¡Hola de nuevo, {user.username}!')
             return redirect('inicio')
         else:
             messages.error(request, 'Usuario o contraseña incorrectos.')
@@ -41,128 +53,239 @@ def login_usuario(request):
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-# 3. Cerrar sesión
-def logout_usuario(request):
+
+
+
+def cerrar_sesion(request):
     logout(request)
     messages.info(request, 'Has cerrado sesión correctamente.')
-    return redirect('login')
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Pelicula, Categoria
-from .forms import PeliculaForm, CategoriaForm
+    return redirect('inicio')
 
-# Verificación de rol administrador en el servidor
-def es_admin(user):
-    return user.is_authenticated and (user.is_staff or user.is_superuser)
+
+
 
 # ==========================================
-# CRUD DE PELÍCULAS (SPRINT 3 - TAREA 1)
+# INICIO
 # ==========================================
 
-def es_admin(user):
-    return user.is_authenticated and (user.is_staff or user.is_superuser)
+
+def inicio(request):
+    peliculas_recientes = Pelicula.objects.select_related('categoria').order_by('-id')[:6]
+    total_peliculas = Pelicula.objects.count()
+    total_categorias = Categoria.objects.count()
+    return render(request, 'inicio.html', {
+        'peliculas_recientes': peliculas_recientes,
+        'total_peliculas': total_peliculas,
+        'total_categorias': total_categorias,
+    })
+
+
+
+
+# ==========================================
+# CRUD DE PELÍCULAS
+# ==========================================
 
 
 def lista_peliculas(request):
     peliculas = Pelicula.objects.select_related('categoria').all().order_by('-id')
-    return render(request, 'lista_peliculas.html', {'peliculas': peliculas})
+    categorias = Categoria.objects.all()
+    return render(request, 'lista_peliculas.html', {
+        'peliculas': peliculas,
+        'categorias': categorias,
+    })
 
 
-@login_required
-@user_passes_test(es_admin)
+
+
+@user_passes_test(es_admin, login_url='login')
 def crear_pelicula(request):
     if request.method == 'POST':
         form = PeliculaForm(request.POST)
         if form.is_valid():
-            pelicula = form.save()
-            messages.success(request, f'Película "{pelicula.titulo}" registrada correctamente.')
+            form.save()
+            messages.success(request, 'Película agregada correctamente.')
             return redirect('lista_peliculas')
     else:
         form = PeliculaForm()
-    return render(request, 'form_pelicula.html', {'form': form, 'accion': 'Registrar Nueva Película'})
+    return render(request, 'form_pelicula.html', {'form': form, 'accion': 'Agregar'})
 
 
-@login_required
-@user_passes_test(es_admin)
+
+
+@user_passes_test(es_admin, login_url='login')
 def editar_pelicula(request, pk):
     pelicula = get_object_or_404(Pelicula, pk=pk)
     if request.method == 'POST':
         form = PeliculaForm(request.POST, instance=pelicula)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Película "{pelicula.titulo}" actualizada correctamente.')
+            messages.success(request, 'Película actualizada correctamente.')
             return redirect('lista_peliculas')
     else:
         form = PeliculaForm(instance=pelicula)
-    return render(request, 'form_pelicula.html', {'form': form, 'accion': f'Editar: {pelicula.titulo}'})
+    return render(request, 'form_pelicula.html', {'form': form, 'accion': 'Editar'})
 
 
-@login_required
-@user_passes_test(es_admin)
+
+
+@user_passes_test(es_admin, login_url='login')
 def eliminar_pelicula(request, pk):
     pelicula = get_object_or_404(Pelicula, pk=pk)
     if request.method == 'POST':
-        titulo = pelicula.titulo
         pelicula.delete()
-        messages.success(request, f'Película "{titulo}" eliminada correctamente.')
+        messages.success(request, 'Película eliminada correctamente.')
         return redirect('lista_peliculas')
     return render(request, 'confirmar_eliminar.html', {
-        'objeto': pelicula,
+        'objeto': pelicula.titulo,
         'tipo': 'película',
         'url_cancelar': 'lista_peliculas'
     })
 
 
+
+
 # ==========================================
-# CRUD DE CATEGORÍAS (SPRINT 3 - TAREA 1)
+# CRUD DE CATEGORÍAS
 # ==========================================
+
 
 def lista_categorias(request):
     categorias = Categoria.objects.all().order_by('nombre')
     return render(request, 'lista_categorias.html', {'categorias': categorias})
 
 
-@login_required
-@user_passes_test(es_admin)
+
+
+@user_passes_test(es_admin, login_url='login')
 def crear_categoria(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
         if form.is_valid():
-            categoria = form.save()
-            messages.success(request, f'Categoría "{categoria.nombre}" creada correctamente.')
+            form.save()
+            messages.success(request, 'Categoría creada correctamente.')
             return redirect('lista_categorias')
     else:
         form = CategoriaForm()
-    return render(request, 'form_categoria.html', {'form': form, 'accion': 'Registrar Nueva Categoría'})
+    return render(request, 'form_categoria.html', {'form': form, 'accion': 'Agregar'})
 
 
-@login_required
-@user_passes_test(es_admin)
+
+
+@user_passes_test(es_admin, login_url='login')
 def editar_categoria(request, pk):
     categoria = get_object_or_404(Categoria, pk=pk)
     if request.method == 'POST':
         form = CategoriaForm(request.POST, instance=categoria)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Categoría "{categoria.nombre}" actualizada correctamente.')
+            messages.success(request, 'Categoría actualizada correctamente.')
             return redirect('lista_categorias')
     else:
         form = CategoriaForm(instance=categoria)
-    return render(request, 'form_categoria.html', {'form': form, 'accion': f'Editar: {categoria.nombre}'})
+    return render(request, 'form_categoria.html', {'form': form, 'accion': 'Editar'})
 
 
-@login_required
-@user_passes_test(es_admin)
+
+
+@user_passes_test(es_admin, login_url='login')
 def eliminar_categoria(request, pk):
     categoria = get_object_or_404(Categoria, pk=pk)
     if request.method == 'POST':
-        nombre = categoria.nombre
         categoria.delete()
-        messages.success(request, f'Categoría "{nombre}" eliminada correctamente.')
+        messages.success(request, 'Categoría eliminada correctamente.')
         return redirect('lista_categorias')
     return render(request, 'confirmar_eliminar.html', {
-        'objeto': categoria,
+        'objeto': categoria.nombre,
         'tipo': 'categoría',
         'url_cancelar': 'lista_categorias'
+    })
+
+
+
+
+# ==========================================
+# CRUD DE RESEÑAS Y CALIFICACIONES (TAREA 2)
+# ==========================================
+
+
+def detalle_pelicula(request, pk):
+    pelicula = get_object_or_404(Pelicula, pk=pk)
+    resenas = pelicula.resenas.select_related('usuario').all()
+    ya_reseno = request.user.is_authenticated and resenas.filter(usuario=request.user).exists()
+
+
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            messages.error(request, 'Debes iniciar sesión para dejar una reseña.')
+            return redirect('login')
+        if ya_reseno:
+            messages.warning(request, 'Ya publicaste una reseña para esta película. Puedes editarla abajo.')
+            return redirect('detalle_pelicula', pk=pk)
+
+
+        form = ResenaForm(request.POST)
+        if form.is_valid():
+            resena = form.save(commit=False)
+            resena.pelicula = pelicula
+            resena.usuario = request.user
+            resena.save()
+            messages.success(request, '¡Tu reseña y calificación se publicaron correctamente!')
+            return redirect('detalle_pelicula', pk=pk)
+    else:
+        form = ResenaForm()
+
+
+    return render(request, 'detalle_pelicula.html', {
+        'pelicula': pelicula,
+        'resenas': resenas,
+        'form': form,
+        'ya_reseno': ya_reseno,
+    })
+
+
+
+
+@login_required
+def editar_resena(request, pk):
+    resena = get_object_or_404(Resena, pk=pk)
+    if resena.usuario != request.user and not es_admin(request.user):
+        messages.error(request, 'No tienes permiso para editar esta reseña.')
+        return redirect('detalle_pelicula', pk=resena.pelicula.pk)
+
+
+    if request.method == 'POST':
+        form = ResenaForm(request.POST, instance=resena)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reseña actualizada correctamente.')
+            return redirect('detalle_pelicula', pk=resena.pelicula.pk)
+    else:
+        form = ResenaForm(instance=resena)
+
+
+    return render(request, 'form_resena.html', {'form': form, 'resena': resena})
+
+
+
+
+@login_required
+def eliminar_resena(request, pk):
+    resena = get_object_or_404(Resena, pk=pk)
+    pelicula_pk = resena.pelicula.pk
+    if resena.usuario != request.user and not es_admin(request.user):
+        messages.error(request, 'No tienes permiso para eliminar esta reseña.')
+        return redirect('detalle_pelicula', pk=pelicula_pk)
+
+
+    if request.method == 'POST':
+        resena.delete()
+        messages.success(request, 'Reseña eliminada correctamente.')
+        return redirect('detalle_pelicula', pk=pelicula_pk)
+
+
+    return render(request, 'confirmar_eliminar.html', {
+        'objeto': f'la reseña de "{resena.pelicula.titulo}"',
+        'tipo': 'reseña',
+        'url_cancelar': 'lista_peliculas'
     })
