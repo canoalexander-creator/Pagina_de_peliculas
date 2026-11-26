@@ -1,0 +1,163 @@
+[
+{
+  "model": "gestion.categoria",
+  "pk": 1,
+  "fields": {
+    "nombre": "terror",
+    "descripcion": ""
+  }
+},
+{
+  "model": "gestion.categoria",
+  "pk": 2,
+  "fields": {
+    "nombre": "romance",
+    "descripcion": ""
+  }
+},
+{
+  "model": "gestion.categoria",
+  "pk": 3,
+  "fields": {
+    "nombre": "comedia",
+    "descripcion": ""
+  }
+},
+{
+  "model": "gestion.categoria",
+  "pk": 4,
+  "fields": {
+    "nombre": "accion",
+    "descripcion": ""
+  }
+},
+{
+  "model": "gestion.categoria",
+  "pk": 5,
+  "fields": {
+    "nombre": "Suspenso",
+    "descripcion": "Peliculas de intriga y tension."
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 1,
+  "fields": {
+    "titulo": "spiderman",
+    "director": "Sam Raimi",
+    "anio": 2002,
+    "sinopsis": "Spider-Man (2002), dirigida por Sam Raimi y protagonizada por Tobey Maguire, cuenta cómo el tímido estudiante Peter Parker obtiene poderes arácnidos tras ser mordido por una araña modificada genéticamente y asume el deber de proteger Nueva York como el Hombre Araña.",
+    "categoria": 4
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 2,
+  "fields": {
+    "titulo": "Rapido y Furiosos",
+    "director": "Rob cohen",
+    "anio": 2001,
+    "sinopsis": "Rápido y furioso (2001) sigue a Brian O'Conner, un policía encubierto de Los Ángeles que se infiltra en el mundo de las carreras callejeras ilegales para investigar una serie de robos de camiones en marcha",
+    "categoria": 4
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 3,
+  "fields": {
+    "titulo": "Avengers: Endgame",
+    "director": "Anthony y Joe Russo",
+    "anio": 2019,
+    "sinopsis": "Avengers: Endgame , concluye la Saga del Infinito del Universo Cinematográfico de Marvel (UCM) mientras los Vengadores supervivientes viajan en el tiempo para revertir el chasquido de Thanos",
+    "categoria": 4
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 4,
+  "fields": {
+    "titulo": "Son como niños",
+    "director": "Dennis Dugan",
+    "anio": 2010,
+    "sinopsis": "es una comedia protagonizada por Adam Sandler, Kevin James, Chris Rock, David Spade y Rob Schneider\r\n El reencuentro: En 1978, cinco amigos de la infancia ganan un campeonato de baloncesto juvenil y celebran en una casa junto a un lago junto a su entrenador. Treinta años después, tras haber perdido el contacto y convertido en adultos con diversos problemas, se vuelven a reunir con sus familias en Nueva Inglaterra para asistir al funeral de su querido entrenado",
+    "categoria": 3
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 5,
+  "fields": {
+    "titulo": "¿Y dónde están las rubias?",
+    "director": "Keenen Ivory Wayans",
+    "anio": 2004,
+    "sinopsis": " El error en el FBI: Kevin y Marcus Copeland son dos agentes del FBI torpes que cometen un gran error en un operativo antidrogas.\r\n La misión: Para no ser despedidos, aceptan la humillante y sencilla tarea de escoltar a las hermanas Brittany y Tiffany Wilson unas millonarias herederas de un famoso hotel desde el aeropuerto hasta un evento en los Hamptons, ya que existe una amenaza de secuestro",
+    "categoria": 3
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 6,
+  "fields": {
+    "titulo": "La la land",
+    "director": "Damien Chazelle.",
+    "anio": 2016,
+    "sinopsis": "La historia sigue a dos jóvenes artistas que luchan por abrirse camino en Los Ángeles, California:\r\n Mia (Emma Stone) es una joven camarera y aspirante a actriz que asiste constantemente a audiciones sin éxito.\r\n Sebastian (Ryan Gosling) es un pianista de jazz apasionado y purista que sueña con abrir su propio club para mantener vivo este género musical, pero que sobrevive tocando en bares poco reconocidos.\r\nTras coincidir en varias ocasiones, ambos se conocen, se enamoran y se convierten en el mayor apoyo mutuo para alcanzar sus metas",
+    "categoria": 2
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 7,
+  "fields": {
+    "titulo": "Chucky: El muñeco diabólico",
+    "director": "Tom holland",
+    "anio": 1988,
+    "sinopsis": "sigue al asesino en serie Charles Lee Ray, quien transfiere su alma mediante un ritual vudú a un muñeco \"Good Guys\" justo antes de morir a manos de la policía, para luego intentar poseer al niño Andy Barclay.",
+    "categoria": 1
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 8,
+  "fields": {
+    "titulo": "Diario de una pasion",
+    "director": "Nick Cassavetes",
+    "anio": 2004,
+    "sinopsis": "El romance de verano (1940): Allie Hamilton (Rachel McAdams), una joven de la alta sociedad, y Noah Calhoun (Ryan Gosling), un joven obrero de clase trabajadora, se conocen en un carnaval y viven un amor de verano intenso. Los padres de Allie desaprueban la relación por la diferencia de recursos económicos y obligan a separarlos.",
+    "categoria": 2
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 9,
+  "fields": {
+    "titulo": "norbit",
+    "director": "Brian Robbins",
+    "anio": 2007,
+    "sinopsis": "Norbit es un hombre amable y tímido que fue abandonado de bebé en un orfanato y restaurante chino dirigido por el Sr. Wong. Con el tiempo, queda atrapado en un matrimonio abusivo con la dominante y agresiva Rasputia.\r\nSu vida cambia cuando Kate, su gran amor de la infancia, regresa al pueblo. A partir de ese reencuentro, Norbit intenta escapar de su matrimonio y recuperar su vida, mientras enfrenta los planes de la familia de Rasputia sobre el orfanato y el negocio local.",
+    "categoria": 3
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 10,
+  "fields": {
+    "titulo": "scream 1",
+    "director": "Wes Craven",
+    "anio": 1996,
+    "sinopsis": "un asesino enmascarado conocido como Ghostface aterroriza al pueblo de Woodsboro un año después de la muerte de la madre de la adolescente Sidney Prescott, utilizando las reglas de las películas de terror en un juego mortal",
+    "categoria": 1
+  }
+},
+{
+  "model": "gestion.pelicula",
+  "pk": 11,
+  "fields": {
+    "titulo": "Guardianes de la Galaxia",
+    "director": "James Gunn",
+    "anio": 2014,
+    "sinopsis": "La historia sigue a Peter Quill (un aventurero terrestre abducido de niño) tras robar un misterioso orbe codiciado por el villano Ronan. Perseguido por cazarrecompensas, Quill forma una alianza poco probable con otros cuatro marginados",
+    "categoria": 4
+  }
+}
+]
