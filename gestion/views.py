@@ -9,8 +9,22 @@ from .models import Pelicula, Categoria, Resena
 from .forms import PeliculaForm, CategoriaForm, ResenaForm
 
 
+from functools import wraps
+
 def es_admin(user):
     return user.is_authenticated and (user.is_staff or user.is_superuser)
+
+def solo_admin(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            messages.warning(request, 'Debes iniciar sesión para acceder a esta sección.')
+            return redirect('login')
+        if not es_admin(request.user):
+            messages.error(request, 'Acceso denegado: se requieren permisos de Administrador.')
+            return redirect('inicio')
+        return view_func(request, *args, **kwargs)
+    return _wrapped_view
 
 
 # ==========================================
