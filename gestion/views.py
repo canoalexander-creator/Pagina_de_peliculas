@@ -70,13 +70,15 @@ def cerrar_sesion(request):
 
 
 def inicio(request):
-    peliculas_recientes = Pelicula.objects.select_related('categoria').order_by('-id')[:6]
-    total_peliculas = Pelicula.objects.count()
-    total_categorias = Categoria.objects.count()
+    categorias = Categoria.objects.all()
+    peliculas = Pelicula.objects.select_related('categoria').all()
+    peliculas_recientes = peliculas.order_by('-id')[:6]
     return render(request, 'inicio.html', {
+        'categorias': categorias,
+        'peliculas': peliculas,
         'peliculas_recientes': peliculas_recientes,
-        'total_peliculas': total_peliculas,
-        'total_categorias': total_categorias,
+        'total_peliculas': peliculas.count(),
+        'total_categorias': categorias.count(),
     })
 
 
