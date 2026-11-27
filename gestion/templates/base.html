@@ -59,6 +59,9 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'lista_peliculas' %}">Cartelera / Películas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'lista_categorias' %}">Géneros y Categorías</a></li>
+                    {% if user.is_authenticated and user.is_staff or user.is_superuser %}
+                        <li class="nav-item"><a class="nav-link text-danger fw-bold" href="{% url 'dashboard' %}">Dashboard</a></li>
+                    {% endif %}
                 </ul>
                 <ul class="navbar-nav align-items-lg-center">
                     {% if user.is_authenticated %}

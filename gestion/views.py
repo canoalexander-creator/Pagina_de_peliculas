@@ -2,23 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 from django.contrib import messages
+from django.db.models import Count
 from .models import Pelicula, Categoria, Resena
 from .forms import PeliculaForm, CategoriaForm, ResenaForm
-
-
 
 
 def es_admin(user):
     return user.is_authenticated and (user.is_staff or user.is_superuser)
 
 
-
-
 # ==========================================
 # AUTENTICACIÓN Y REGISTRO
 # ==========================================
-
 
 def registro_usuario(request):
     if request.user.is_authenticated:
@@ -33,8 +30,6 @@ def registro_usuario(request):
     else:
         form = UserCreationForm()
     return render(request, 'registro.html', {'form': form})
-
-
 
 
 def iniciar_sesion(request):
@@ -54,20 +49,15 @@ def iniciar_sesion(request):
     return render(request, 'login.html', {'form': form})
 
 
-
-
 def cerrar_sesion(request):
     logout(request)
     messages.info(request, 'Has cerrado sesión correctamente.')
     return redirect('inicio')
 
 
-
-
 # ==========================================
-# INICIO
+# INICIO Y DASHBOARD ADMINISTRATIVO (SPRINT 3)
 # ==========================================
-
 
 def inicio(request):
     categorias = Categoria.objects.all()
@@ -82,12 +72,31 @@ def inicio(request):
     })
 
 
+@user_passes_test(es_admin, login_url='login')
+def dashboard_admin(request):
+    total_peliculas = Pelicula.objects.count()
+    total_categorias = Categoria.objects.count()
+    total_resenas = Resena.objects.count()
+    total_usuarios = User.objects.count()
+
+    peliculas_recientes = Pelicula.objects.select_related('categoria').order_by('-id')[:5]
+    categorias_con_conteo = Categoria.objects.annotate(num_peliculas=Count('peliculas')).order_by('-num_peliculas')
+    resenas_recientes = Resena.objects.select_related('pelicula', 'usuario').order_by('-fecha_creacion')[:5]
+
+    return render(request, 'dashboard.html', {
+        'total_peliculas': total_peliculas,
+        'total_categorias': total_categorias,
+        'total_resenas': total_resenas,
+        'total_usuarios': total_usuarios,
+        'peliculas_recientes': peliculas_recientes,
+        'categorias_con_conteo': categorias_con_conteo,
+        'resenas_recientes': resenas_recientes,
+    })
 
 
 # ==========================================
 # CRUD DE PELÍCULAS
 # ==========================================
-
 
 def lista_peliculas(request):
     peliculas = Pelicula.objects.select_related('categoria').all().order_by('-id')
@@ -96,8 +105,6 @@ def lista_peliculas(request):
         'peliculas': peliculas,
         'categorias': categorias,
     })
-
-
 
 
 @user_passes_test(es_admin, login_url='login')
@@ -111,8 +118,6 @@ def crear_pelicula(request):
     else:
         form = PeliculaForm()
     return render(request, 'form_pelicula.html', {'form': form, 'accion': 'Agregar'})
-
-
 
 
 @user_passes_test(es_admin, login_url='login')
@@ -129,8 +134,6 @@ def editar_pelicula(request, pk):
     return render(request, 'form_pelicula.html', {'form': form, 'accion': 'Editar'})
 
 
-
-
 @user_passes_test(es_admin, login_url='login')
 def eliminar_pelicula(request, pk):
     pelicula = get_object_or_404(Pelicula, pk=pk)
@@ -145,18 +148,13 @@ def eliminar_pelicula(request, pk):
     })
 
 
-
-
 # ==========================================
 # CRUD DE CATEGORÍAS
 # ==========================================
 
-
 def lista_categorias(request):
     categorias = Categoria.objects.all().order_by('nombre')
     return render(request, 'lista_categorias.html', {'categorias': categorias})
-
-
 
 
 @user_passes_test(es_admin, login_url='login')
@@ -170,8 +168,6 @@ def crear_categoria(request):
     else:
         form = CategoriaForm()
     return render(request, 'form_categoria.html', {'form': form, 'accion': 'Agregar'})
-
-
 
 
 @user_passes_test(es_admin, login_url='login')
@@ -188,8 +184,6 @@ def editar_categoria(request, pk):
     return render(request, 'form_categoria.html', {'form': form, 'accion': 'Editar'})
 
 
-
-
 @user_passes_test(es_admin, login_url='login')
 def eliminar_categoria(request, pk):
     categoria = get_object_or_404(Categoria, pk=pk)
@@ -204,18 +198,14 @@ def eliminar_categoria(request, pk):
     })
 
 
-
-
 # ==========================================
 # CRUD DE RESEÑAS Y CALIFICACIONES (TAREA 2)
 # ==========================================
-
 
 def detalle_pelicula(request, pk):
     pelicula = get_object_or_404(Pelicula, pk=pk)
     resenas = pelicula.resenas.select_related('usuario').all()
     ya_reseno = request.user.is_authenticated and resenas.filter(usuario=request.user).exists()
-
 
     if request.method == 'POST':
         if not request.user.is_authenticated:
@@ -224,7 +214,6 @@ def detalle_pelicula(request, pk):
         if ya_reseno:
             messages.warning(request, 'Ya publicaste una reseña para esta película. Puedes editarla abajo.')
             return redirect('detalle_pelicula', pk=pk)
-
 
         form = ResenaForm(request.POST)
         if form.is_valid():
@@ -237,7 +226,6 @@ def detalle_pelicula(request, pk):
     else:
         form = ResenaForm()
 
-
     return render(request, 'detalle_pelicula.html', {
         'pelicula': pelicula,
         'resenas': resenas,
@@ -246,15 +234,12 @@ def detalle_pelicula(request, pk):
     })
 
 
-
-
 @login_required
 def editar_resena(request, pk):
     resena = get_object_or_404(Resena, pk=pk)
     if resena.usuario != request.user and not es_admin(request.user):
         messages.error(request, 'No tienes permiso para editar esta reseña.')
         return redirect('detalle_pelicula', pk=resena.pelicula.pk)
-
 
     if request.method == 'POST':
         form = ResenaForm(request.POST, instance=resena)
@@ -265,10 +250,7 @@ def editar_resena(request, pk):
     else:
         form = ResenaForm(instance=resena)
 
-
     return render(request, 'form_resena.html', {'form': form, 'resena': resena})
-
-
 
 
 @login_required
@@ -279,12 +261,10 @@ def eliminar_resena(request, pk):
         messages.error(request, 'No tienes permiso para eliminar esta reseña.')
         return redirect('detalle_pelicula', pk=pelicula_pk)
 
-
     if request.method == 'POST':
         resena.delete()
         messages.success(request, 'Reseña eliminada correctamente.')
         return redirect('detalle_pelicula', pk=pelicula_pk)
-
 
     return render(request, 'confirmar_eliminar.html', {
         'objeto': f'la reseña de "{resena.pelicula.titulo}"',
