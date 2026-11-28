@@ -3,49 +3,71 @@
 {% block title %}Dashboard Admin | CineApp{% endblock %}
 
 {% block content %}
-<div class="container py-4">
+<div class="py-2">
 
     <!-- Encabezado y Accesos Directos CRUD -->
     <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom border-secondary">
         <div>
-            <h2 class="fw-bold mb-1">Dashboard Administrativo</h2>
-            <p class="text-secondary mb-0">Panel de control de <strong>{{ request.user.username }}</strong></p>
+            <h2 class="fw-bold mb-1">
+                <i class="bi bi-speedometer2 text-danger me-2"></i>Dashboard Administrativo
+            </h2>
+            <p class="text-secondary mb-0">
+                Panel de control de <strong class="text-light">{{ request.user.username }}</strong>
+            </p>
         </div>
         <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0">
-            <a href="{% url 'crear_pelicula' %}" class="btn btn-cine">+ Nueva Película</a>
-            <a href="{% url 'crear_categoria' %}" class="btn btn-outline-light">+ Nueva Categoría</a>
-            <a href="{% url 'lista_peliculas' %}" class="btn btn-outline-secondary">Ver Cartelera</a>
+            <a href="{% url 'crear_pelicula' %}" class="btn btn-cine">
+                <i class="bi bi-plus-circle me-1"></i>Nueva Película
+            </a>
+            <a href="{% url 'crear_categoria' %}" class="btn btn-outline-light">
+                <i class="bi bi-folder-plus me-1"></i>Nueva Categoría
+            </a>
+            <a href="{% url 'lista_peliculas' %}" class="btn btn-outline-secondary">
+                <i class="bi bi-film me-1"></i>Ver Cartelera
+            </a>
         </div>
     </div>
 
     <!-- Tarjetas de Indicadores (KPIs) -->
     <div class="row g-3 mb-4">
         <div class="col-6 col-md-3">
-            <div class="card card-cine bg-dark h-100 p-3">
-                <span class="text-secondary small text-uppercase">Películas</span>
-                <h2 class="fw-bold text-danger mt-1 mb-0">{{ total_peliculas }}</h2>
-                <small class="text-muted">En catálogo</small>
+            <div class="card card-cine h-100 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-secondary small text-uppercase fw-semibold">Películas</span>
+                    <i class="bi bi-film text-danger fs-5"></i>
+                </div>
+                <h2 class="fw-bold text-danger mt-2 mb-0">{{ total_peliculas }}</h2>
+                <small class="text-secondary">En catálogo</small>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="card card-cine bg-dark h-100 p-3">
-                <span class="text-secondary small text-uppercase">Categorías</span>
-                <h2 class="fw-bold text-warning mt-1 mb-0">{{ total_categorias }}</h2>
-                <small class="text-muted">Géneros registrados</small>
+            <div class="card card-cine h-100 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-secondary small text-uppercase fw-semibold">Categorías</span>
+                    <i class="bi bi-tags text-warning fs-5"></i>
+                </div>
+                <h2 class="fw-bold text-warning mt-2 mb-0">{{ total_categorias }}</h2>
+                <small class="text-secondary">Géneros registrados</small>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="card card-cine bg-dark h-100 p-3">
-                <span class="text-secondary small text-uppercase">Reseñas</span>
-                <h2 class="fw-bold text-info mt-1 mb-0">{{ total_resenas }}</h2>
-                <small class="text-muted">Comentarios totales</small>
+            <div class="card card-cine h-100 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-secondary small text-uppercase fw-semibold">Reseñas</span>
+                    <i class="bi bi-chat-square-quote text-info fs-5"></i>
+                </div>
+                <h2 class="fw-bold text-info mt-2 mb-0">{{ total_resenas }}</h2>
+                <small class="text-secondary">Comentarios totales</small>
             </div>
         </div>
         <div class="col-6 col-md-3">
-            <div class="card card-cine bg-dark h-100 p-3">
-                <span class="text-secondary small text-uppercase">Usuarios</span>
-                <h2 class="fw-bold text-light mt-1 mb-0">{{ total_usuarios }}</h2>
-                <small class="text-muted">Cuentas activas</small>
+            <div class="card card-cine h-100 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-secondary small text-uppercase fw-semibold">Usuarios</span>
+                    <i class="bi bi-people text-light fs-5"></i>
+                </div>
+                <h2 class="fw-bold text-light mt-2 mb-0">{{ total_usuarios }}</h2>
+                <small class="text-secondary">Cuentas activas</small>
             </div>
         </div>
     </div>
@@ -54,15 +76,19 @@
     <div class="row g-4">
         <!-- Últimas Películas -->
         <div class="col-lg-8">
-            <div class="card card-cine bg-dark">
-                <div class="card-header border-secondary d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold">Últimas Películas Registradas</h5>
-                    <a href="{% url 'lista_peliculas' %}" class="btn btn-sm btn-outline-light">Ver todas</a>
+            <div class="table-wrapper-cine">
+                <div class="px-3 py-3 border-bottom border-secondary d-flex justify-content-between align-items-center" style="background-color: #1b1e28;">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-collection-play text-danger me-2"></i>Últimas Películas Registradas
+                    </h5>
+                    <a href="{% url 'lista_peliculas' %}" class="btn btn-sm btn-outline-light">
+                        Ver todas <i class="bi bi-arrow-right ms-1"></i>
+                    </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-dark table-hover align-middle mb-0">
+                    <table class="table table-dark table-cine">
                         <thead>
-                            <tr class="text-secondary small">
+                            <tr>
                                 <th>Título</th>
                                 <th>Categoría</th>
                                 <th>Año</th>
@@ -73,16 +99,27 @@
                             {% for peli in peliculas_recientes %}
                             <tr>
                                 <td class="fw-semibold">{{ peli.titulo }}</td>
-                                <td><span class="badge badge-categoria">{{ peli.categoria.nombre|default:"Sin categoría" }}</span></td>
+                                <td>
+                                    <span class="badge badge-categoria">
+                                        {{ peli.categoria.nombre|default:"Sin categoría" }}
+                                    </span>
+                                </td>
                                 <td class="text-secondary">{{ peli.anio|default:"-" }}</td>
-                                <td class="text-end">
-                                    <a href="{% url 'editar_pelicula' peli.id %}" class="btn btn-sm btn-outline-warning">Editar</a>
-                                    <a href="{% url 'eliminar_pelicula' peli.id %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                <td class="text-end text-nowrap">
+                                    <a href="{% url 'editar_pelicula' peli.id %}" class="btn btn-outline-warning btn-action" title="Editar">
+                                        <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a href="{% url 'eliminar_pelicula' peli.id %}" class="btn btn-outline-danger btn-action ms-1" title="Eliminar">
+                                        <i class="bi bi-trash3"></i> Eliminar
+                                    </a>
                                 </td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="4" class="text-center text-secondary py-3">No hay películas registradas.</td>
+                                <td colspan="4" class="text-center text-secondary py-4">
+                                    <i class="bi bi-inbox fs-3 d-block mb-2"></i>
+                                    No hay películas registradas todavía.
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -93,15 +130,19 @@
 
         <!-- Películas por Categoría -->
         <div class="col-lg-4">
-            <div class="card card-cine bg-dark">
-                <div class="card-header border-secondary d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold">Por Categoría</h5>
-                    <a href="{% url 'lista_categorias' %}" class="btn btn-sm btn-outline-light">Gestionar</a>
+            <div class="table-wrapper-cine">
+                <div class="px-3 py-3 border-bottom border-secondary d-flex justify-content-between align-items-center" style="background-color: #1b1e28;">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="bi bi-pie-chart text-danger me-2"></i>Por Categoría
+                    </h5>
+                    <a href="{% url 'lista_categorias' %}" class="btn btn-sm btn-outline-light">
+                        Gestionar
+                    </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-dark table-hover align-middle mb-0">
+                    <table class="table table-dark table-cine">
                         <thead>
-                            <tr class="text-secondary small">
+                            <tr>
                                 <th>Género</th>
                                 <th class="text-end">Películas</th>
                             </tr>
@@ -109,12 +150,17 @@
                         <tbody>
                             {% for cat in categorias_con_conteo %}
                             <tr>
-                                <td>{{ cat.nombre }}</td>
-                                <td class="text-end"><span class="badge bg-danger">{{ cat.num_peliculas }}</span></td>
+                                <td class="fw-medium">{{ cat.nombre }}</td>
+                                <td class="text-end">
+                                    <span class="badge bg-danger rounded-pill px-2">{{ cat.num_peliculas }}</span>
+                                </td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="2" class="text-center text-secondary py-3">Sin categorías.</td>
+                                <td colspan="2" class="text-center text-secondary py-4">
+                                    <i class="bi bi-tags fs-3 d-block mb-2"></i>
+                                    Sin categorías registradas.
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
